@@ -8,6 +8,6 @@ go:
   - 'tip'
 
 script:
-  - go test -coverpkg = ./... -coverprofile = coverage.info -timeout 5s
+  - go test -coverpkg = ./...  -coverprofile = coverage.info -timeout=5s
   - bash < (curl -s https://codecov.io/bash)
   
