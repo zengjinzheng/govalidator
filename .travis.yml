@@ -7,10 +7,7 @@ go:
   - '1.13'
   - 'tip'
 
-before_install:
-  - go get github.com/mattn/goveralls
-  - go get golang.org/x/tools/cmd/cover
-
 script:
-  #  - go test -v -cover
-  - $GOPATH/bin/goveralls -v -service=travis-ci
+  - go test -coverpkg = ./... -coverprofile = coverage.info -timeout 5s
+  - bash < (curl -s https://codecov.io/bash)
+  
