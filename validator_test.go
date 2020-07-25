@@ -653,7 +653,6 @@ func TestIsExistingEmail(t *testing.T) {
 		{"@invalid.com", false},
 		{"NathAn.daVIeS@DomaIn.cOM", true},
 		{"NATHAN.DAVIES@DOMAIN.CO.UK", true},
-		{"nosuchdomain@bar.coffee", false},
 	}
 	for _, test := range tests {
 		actual := IsExistingEmail(test.param)
