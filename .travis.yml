@@ -1,6 +1,6 @@
 dist: xenial
 go:
-  - '1.13'
+  - '1.12'
   - 'tip'
 
 before_install:
