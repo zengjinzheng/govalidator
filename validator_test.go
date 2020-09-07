@@ -635,6 +635,132 @@ func TestIsHash(t *testing.T) {
 	}
 }
 
+func TestIsSHA384(t *testing.T) {
+	t.Parallel()
+
+	var tests = []struct {
+		param    string
+		expected bool
+	}{
+		{"bf547c3fc5841a377eb1519c2890344dbab15c40ae4150b4b34443d2212e5b04aa9d58865bf03d8ae27840fef430b891", true},
+		{"579282cfb65ca1f109b78536effaf621b853c9f7079664a3fbe2b519f435898casfdsafsadfsdf", false},
+	}
+	for _, test := range tests {
+		actual := IsSHA384(test.param)
+		if actual != test.expected {
+			t.Errorf("Expected IsSHA384(%q) to be %v, got %v", test.param, test.expected, actual)
+		}
+	}
+}
+
+func TestIsSHA512(t *testing.T) {
+	t.Parallel()
+
+	var tests = []struct {
+		param    string
+		expected bool
+	}{
+		{"45bc5fa8cb45ee408c04b6269e9f1e1c17090c5ce26ffeeda2af097735b29953ce547e40ff3ad0d120e5361cc5f9cee35ea91ecd4077f3f589b4d439168f91b9", true},
+		{"579282cfb65ca1f109b78536effaf621b853c9f7079664a3fbe2b519f435898casfdsafsadfsdf", false},
+	}
+	for _, test := range tests {
+		actual := IsSHA512(test.param)
+		if actual != test.expected {
+			t.Errorf("Expected IsSHA512(%q) to be %v, got %v", test.param, test.expected, actual)
+		}
+	}
+}
+
+func TestIsSHA256(t *testing.T) {
+	t.Parallel()
+
+	var tests = []struct {
+		param    string
+		expected bool
+	}{
+		{"579282cfb65ca1f109b78536effaf621b853c9f7079664a3fbe2b519f435898c", true},
+		{"579282cfb65ca1f109b78536effaf621b853c9f7079664a3fbe2b519f435898casfdsafsadfsdf", false},
+	}
+	for _, test := range tests {
+		actual := IsSHA256(test.param)
+		if actual != test.expected {
+			t.Errorf("Expected IsSHA256(%q) to be %v, got %v", test.param, test.expected, actual)
+		}
+	}
+}
+
+func TestIsTiger192(t *testing.T) {
+	t.Parallel()
+
+	var tests = []struct {
+		param    string
+		expected bool
+	}{
+		{"46fc0125a148788a3ac1d649566fc04eb84a746f1a6e4fa7", true},
+		{"46fc0125a148788a3ac1d649566fc04eb84a746f1a6$$%@^", false},
+	}
+	for _, test := range tests {
+		actual := IsTiger192(test.param)
+		if actual != test.expected {
+			t.Errorf("Expected IsTiger192(%q) to be %v, got %v", test.param, test.expected, actual)
+		}
+	}
+}
+
+func TestIsTiger160(t *testing.T) {
+	t.Parallel()
+
+	var tests = []struct {
+		param    string
+		expected bool
+	}{
+		{"3ca25ae354e192b26879f651a51d92aa8a34d8d3", true},
+		{"3ca25ae354e192b26879f651a51d92aa8a34d8d32", false},
+	}
+	for _, test := range tests {
+		actual := IsTiger160(test.param)
+		if actual != test.expected {
+			t.Errorf("Expected IsTiger160(%q) to be %v, got %v", test.param, test.expected, actual)
+		}
+	}
+}
+
+func TestIsRipeMD160(t *testing.T) {
+	t.Parallel()
+
+	var tests = []struct {
+		param    string
+		expected bool
+	}{
+		{"3ca25ae354e192b26879f651a51d92aa8a34d8d3", true},
+		{"3ca25ae354e192b26879f651a51d34d8d3", false},
+	}
+	for _, test := range tests {
+		actual := IsRipeMD160(test.param)
+		if actual != test.expected {
+			t.Errorf("Expected IsRipeMD160(%q) to be %v, got %v", test.param, test.expected, actual)
+		}
+	}
+}
+
+func TestIsSHA1(t *testing.T) {
+	t.Parallel()
+
+	var tests = []struct {
+		param    string
+		expected bool
+	}{
+		{"3ca25ae354e192b26879f651a51d92aa8a34d8d3", true},
+		{"3ca25ae354e192b26879f651a51d34d8d3", false},
+	}
+	for _, test := range tests {
+		actual := IsSHA1(test.param)
+		if actual != test.expected {
+			t.Errorf("Expected IsSHA1(%q) to be %v, got %v", test.param, test.expected, actual)
+		}
+	}
+}
+
 func TestIsExistingEmail(t *testing.T) {
 	t.Parallel()
 
@@ -1017,6 +1143,24 @@ func TestIsNull(t *testing.T) {
 		actual := IsNull(test.param)
 		if actual != test.expected {
 			t.Errorf("Expected IsNull(%q) to be %v, got %v", test.param, test.expected, actual)
+		}
+	}
+}
+
+func TestIsNotNull(t *testing.T) {
+	t.Parallel()
+
+	var tests = []struct {
+		param    string
+		expected bool
+	}{
+		{"abacaba", true},
+		{"", false},
+	}
+	for _, test := range tests {
+		actual := IsNotNull(test.param)
+		if actual != test.expected {
+			t.Errorf("Expected IsNotNull(%q) to be %v, got %v", test.param, test.expected, actual)
 		}
 	}
 }
